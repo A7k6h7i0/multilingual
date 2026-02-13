@@ -1,14 +1,9 @@
 #!/bin/bash
 
 # Multilingual Conference - Railway Startup Script
-# This script starts the backend API server
+# This script starts the backend API server using tsx (TypeScript executor)
 
 cd backend
 
-# Build if not already built
-if [ ! -d "dist" ]; then
-    npm run build
-fi
-
-# Start the server
-exec npm start
+# Use tsx to run TypeScript directly (no compilation needed)
+exec npx tsx src/server.ts

@@ -9,15 +9,14 @@ WORKDIR /app/backend
 # Copy backend package files
 COPY backend/package*.json ./
 
-# Install backend dependencies (including dev for TypeScript build)
+# Install backend dependencies
 RUN npm install --no-audit --no-fund
 
 # Copy backend source
 COPY backend/src ./src
 COPY backend/tsconfig.json ./
 
-# Build backend
-RUN npm run build
+# No build step needed - tsx will run TypeScript directly
 
 # ============ FRONTEND ============
 FROM node:20-alpine AS frontend
@@ -36,6 +35,7 @@ COPY frontend/index.html ./
 COPY frontend/tailwind.config.js ./
 COPY frontend/postcss.config.js ./
 COPY frontend/tsconfig.json ./
+COPY frontend/tsconfig.node.json ./
 COPY frontend/vite.config.ts ./
 
 # Build frontend
@@ -47,10 +47,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Copy built backend
-COPY --from=backend /app/backend/dist ./backend/dist
-COPY --from=backend /app/backend/src ./backend/src
-COPY --from=backend /app/backend/node_modules ./backend/node_modules
-COPY --from=backend /app/backend/package*.json ./backend/
+COPY --from=backend /app/backend ./backend
 
 # Copy built frontend
 COPY --from=frontend /app/frontend/dist ./frontend/dist
