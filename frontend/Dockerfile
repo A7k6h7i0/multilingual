@@ -1,4 +1,4 @@
-# Frontend Dockerfile
+# Frontend Dockerfile for Railway
 FROM node:20-alpine as build
 
 WORKDIR /app
@@ -20,16 +20,19 @@ COPY vite.config.ts ./
 # Build the frontend
 RUN npm run build
 
-# Production stage with Nginx
-FROM nginx:alpine
+# Production stage
+FROM node:20-alpine
 
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
 # Copy built files
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist ./dist
+
+# Install serve globally
+RUN npm install -g serve
 
 # Expose port
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+# Start serve
+CMD ["serve", "dist", "-s", "-l", "80"]

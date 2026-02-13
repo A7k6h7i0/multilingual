@@ -1,0 +1,14 @@
+{
+  "$schema": "https://railway.com/schema.json",
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "npx serve dist -l $PORT",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 30,
+    "restartPolicyType": "always"
+  },
+  "root": "frontend",
+  "name": "multilingual-conference-frontend"
+}
