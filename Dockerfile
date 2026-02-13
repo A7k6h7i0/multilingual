@@ -9,8 +9,8 @@ WORKDIR /app/backend
 # Copy backend package files
 COPY backend/package*.json ./
 
-# Install backend dependencies
-RUN npm install --omit=dev --no-audit --no-fund
+# Install backend dependencies (including dev for TypeScript build)
+RUN npm install --no-audit --no-fund
 
 # Copy backend source
 COPY backend/src ./src
