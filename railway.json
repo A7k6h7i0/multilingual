@@ -1,16 +1,14 @@
 {
   "$schema": "https://railway.com/schema.json",
   "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "cd backend && npm install && npm run build && cd ../frontend && npm install && npm run build",
-    "installCommand": "cd backend && npm install --only=production && cd ../frontend && npm install"
+    "builder": "DOCKERFILE",
+    "buildCommand": "cd backend && npm install && npm run build && cd ../frontend && npm install && npm run build"
   },
   "deploy": {
     "startCommand": "cd backend && npm start",
     "healthcheckPath": "/",
     "healthcheckTimeout": 30,
-    "restartPolicyType": "always",
-    "restartPolicyMaxRetries": 10
+    "restartPolicyType": "always"
   },
   "root": ".",
   "name": "multilingual-conference"
