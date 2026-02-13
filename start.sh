@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Multilingual Conference - Railway Startup Script
 # This script starts the backend API server using tsx (TypeScript executor)
