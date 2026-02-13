@@ -8,8 +8,11 @@
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Load environment variables from .env file
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+// Load environment variables from .env file (only if file exists)
+const envPath = path.resolve(__dirname, '../../.env');
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: envPath });
+}
 
 /**
  * Validates that required environment variables are present
