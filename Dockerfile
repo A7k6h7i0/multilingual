@@ -7,10 +7,10 @@ FROM node:20-alpine AS backend
 WORKDIR /app/backend
 
 # Copy backend package files
-COPY backend/package*.json ./ 
+COPY backend/package*.json ./
 
 # Install backend dependencies
-RUN npm ci --only=production
+RUN npm install --only=production --no-audit --no-fund
 
 # Copy backend source
 COPY backend/src ./src
@@ -28,7 +28,7 @@ WORKDIR /app/frontend
 COPY frontend/package*.json ./
 
 # Install frontend dependencies
-RUN npm ci
+RUN npm install --no-audit --no-fund
 
 # Copy frontend source
 COPY frontend/src ./src
