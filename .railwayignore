@@ -1,0 +1,26 @@
+# Railway ignore file
+# Files and directories to ignore during deployment
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary
+*.tmp
+temp/
+tmp/
+
+# Coverage
+coverage/
+*.lcov
+
+# Documentation (optional)
+README.md
